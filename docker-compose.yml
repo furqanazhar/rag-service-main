@@ -25,7 +25,7 @@ services:
       - ./data/local_mapping.json:/usr/local/local_mapping.json
     command:
       - |
-        until (wget -O- http://elasticsearch:9200/_cluster/health?wait_for_status=green > /dev/null); do
+        until (wget -O- http://elasticsearch:9200/_cluster/health?pretty > /dev/null); do
             printf 'WAITING FOR THE ELASTICSEARCH ENDPOINT BE AVAILABLE, trying again in 5 seconds \n'
             sleep 5
         done
