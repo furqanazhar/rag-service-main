@@ -63,6 +63,20 @@ services:
     networks:
       - local-network
 
+  fastapi-service:
+    container_name: fastapi-service
+    build:
+      context: ./fastapi_service
+      dockerfile: Dockerfile
+    entrypoint:
+      - /bin/sh
+      - -ce
+    command:
+      - uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    networks:
+      - local-network
 
 networks:
   local-network:
