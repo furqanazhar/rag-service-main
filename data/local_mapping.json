@@ -1,0 +1,1341 @@
+{
+      "dynamic_templates" : [
+        {
+          "embeddings_100_" : {
+            "match" : "embeddings_100_*",
+            "mapping" : {
+              "dims" : 100,
+              "index" : true,
+              "similarity" : "dot_product",
+              "type" : "dense_vector"
+            }
+          }
+        },
+        {
+          "embeddings_200_" : {
+            "match" : "embeddings_200_*",
+            "mapping" : {
+              "dims" : 200,
+              "index" : true,
+              "similarity" : "dot_product",
+              "type" : "dense_vector"
+            }
+          }
+        },
+        {
+          "embeddings_768_" : {
+            "match" : "embeddings_768_*",
+            "mapping" : {
+              "dims" : 768,
+              "index" : true,
+              "similarity" : "dot_product",
+              "type" : "dense_vector"
+            }
+          }
+        },
+        {
+          "embeddings_1024_" : {
+            "match" : "embeddings_1024_*",
+            "mapping" : {
+              "dims" : 1024,
+              "index" : true,
+              "similarity" : "dot_product",
+              "type" : "dense_vector"
+            }
+          }
+        },
+        {
+          "embeddings_1536_" : {
+            "match" : "embeddings_1536_*",
+            "mapping" : {
+              "dims" : 1536,
+              "index" : true,
+              "similarity" : "dot_product",
+              "type" : "dense_vector"
+            }
+          }
+        }
+      ],
+      "properties" : {
+        "agg_stats" : {
+          "properties" : {
+            "backward" : {
+              "properties" : {
+                "application_dt" : {
+                  "properties" : {
+                    "max_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "median_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "min_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    }
+                  }
+                },
+                "priority_dt" : {
+                  "properties" : {
+                    "max_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "median_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "min_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    }
+                  }
+                },
+                "published" : {
+                  "properties" : {
+                    "max_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "median_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "min_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    }
+                  }
+                },
+                "total_count" : {
+                  "properties" : {
+                    "avg" : {
+                      "type" : "float"
+                    },
+                    "max" : {
+                      "type" : "integer"
+                    },
+                    "min" : {
+                      "type" : "integer"
+                    }
+                  }
+                },
+                "total_count_self" : {
+                  "properties" : {
+                    "avg" : {
+                      "type" : "float"
+                    },
+                    "max" : {
+                      "type" : "integer"
+                    },
+                    "min" : {
+                      "type" : "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "country_count" : {
+              "type" : "integer"
+            },
+            "forward" : {
+              "properties" : {
+                "application_dt" : {
+                  "properties" : {
+                    "cite1" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "cite2" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "cite3" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "max_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "median_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "min_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    }
+                  }
+                },
+                "priority_dt" : {
+                  "properties" : {
+                    "cite1" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "cite2" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "cite3" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "max_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "median_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "min_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    }
+                  }
+                },
+                "published" : {
+                  "properties" : {
+                    "cite1" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "cite2" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "cite3" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "integer"
+                        },
+                        "min" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "max_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "median_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "min_age" : {
+                      "properties" : {
+                        "avg" : {
+                          "type" : "float"
+                        },
+                        "max" : {
+                          "type" : "float"
+                        },
+                        "min" : {
+                          "type" : "float"
+                        }
+                      }
+                    }
+                  }
+                },
+                "total_count" : {
+                  "properties" : {
+                    "avg" : {
+                      "type" : "float"
+                    },
+                    "max" : {
+                      "type" : "integer"
+                    },
+                    "min" : {
+                      "type" : "integer"
+                    }
+                  }
+                },
+                "total_count_self" : {
+                  "properties" : {
+                    "avg" : {
+                      "type" : "float"
+                    },
+                    "max" : {
+                      "type" : "integer"
+                    },
+                    "min" : {
+                      "type" : "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "ifi_claims" : {
+              "properties" : {
+                "independent_claim_count" : {
+                  "properties" : {
+                    "avg" : {
+                      "type" : "float"
+                    },
+                    "max" : {
+                      "type" : "integer"
+                    },
+                    "min" : {
+                      "type" : "integer"
+                    }
+                  }
+                },
+                "total_claim_count" : {
+                  "properties" : {
+                    "avg" : {
+                      "type" : "float"
+                    },
+                    "max" : {
+                      "type" : "integer"
+                    },
+                    "min" : {
+                      "type" : "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "member_count" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "embeddings_768_bgebase" : {
+          "type" : "dense_vector",
+          "dims" : 768,
+          "index" : true,
+          "similarity" : "dot_product"
+        },
+        "family_id" : {
+          "type" : "long"
+        },
+        "family_modified_load_id" : {
+          "type" : "long"
+        },
+        "max_application_dt" : {
+          "type" : "date"
+        },
+        "max_priority_dt" : {
+          "type" : "date"
+        },
+        "max_published" : {
+          "type" : "date"
+        },
+        "members" : {
+          "type" : "nested",
+          "properties" : {
+            "abstract" : {
+              "type" : "nested",
+              "properties" : {
+                "lang" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "load_source" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "text" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "anticipated_expiration" : {
+              "type" : "date"
+            },
+            "applicants" : {
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "application_dt" : {
+              "type" : "date"
+            },
+            "assignees" : {
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "backward" : {
+              "properties" : {
+                "application_dt" : {
+                  "type" : "date"
+                },
+                "family_id" : {
+                  "type" : "long"
+                },
+                "priority_dt" : {
+                  "type" : "date"
+                },
+                "publication_id" : {
+                  "type" : "long"
+                },
+                "published" : {
+                  "type" : "date"
+                },
+                "source" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "ucid" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "best_standardized_name" : {
+              "type" : "nested",
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name_type" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "number" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "claims" : {
+              "type" : "nested",
+              "properties" : {
+                "lang" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "load_source" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "text" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "country" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "cpc" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "created_load_id" : {
+              "type" : "long"
+            },
+            "deleted_load_id" : {
+              "type" : "long"
+            },
+            "description" : {
+              "type" : "nested",
+              "properties" : {
+                "lang" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "load_source" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "text" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "examiners" : {
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "family_id" : {
+              "type" : "long"
+            },
+            "forward" : {
+              "properties" : {
+                "application_dt" : {
+                  "type" : "date"
+                },
+                "family_id" : {
+                  "type" : "long"
+                },
+                "priority_dt" : {
+                  "type" : "date"
+                },
+                "publication_id" : {
+                  "type" : "long"
+                },
+                "published" : {
+                  "type" : "date"
+                },
+                "source" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "ucid" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "ifi_standardized_name" : {
+              "type" : "nested",
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name_type" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "number" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "ifi_standardized_name_current" : {
+              "type" : "nested",
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name_type" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "number" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "ifi_standardized_name_probable" : {
+              "type" : "nested",
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name_type" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "number" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "invention_title" : {
+              "type" : "nested",
+              "properties" : {
+                "lang" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "load_source" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "text" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "inventors" : {
+              "properties" : {
+                "country" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "normalized" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                }
+              }
+            },
+            "ipcr" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "is_design" : {
+              "type" : "boolean"
+            },
+            "is_representative" : {
+              "type" : "boolean"
+            },
+            "kind" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "lang" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "modified_load_id" : {
+              "type" : "long"
+            },
+            "priority_dt" : {
+              "type" : "date"
+            },
+            "publication_id" : {
+              "type" : "long"
+            },
+            "publication_type" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "published" : {
+              "type" : "date"
+            },
+            "stats" : {
+              "properties" : {
+                "backward" : {
+                  "properties" : {
+                    "application_dt" : {
+                      "properties" : {
+                        "max_age" : {
+                          "type" : "float"
+                        },
+                        "median_age" : {
+                          "type" : "float"
+                        },
+                        "min_age" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "priority_dt" : {
+                      "properties" : {
+                        "max_age" : {
+                          "type" : "float"
+                        },
+                        "median_age" : {
+                          "type" : "float"
+                        },
+                        "min_age" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "published" : {
+                      "properties" : {
+                        "max_age" : {
+                          "type" : "float"
+                        },
+                        "median_age" : {
+                          "type" : "float"
+                        },
+                        "min_age" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "total_count" : {
+                      "type" : "integer"
+                    },
+                    "total_count_self" : {
+                      "type" : "integer"
+                    }
+                  }
+                },
+                "forward" : {
+                  "properties" : {
+                    "application_dt" : {
+                      "properties" : {
+                        "cite1" : {
+                          "type" : "integer"
+                        },
+                        "cite2" : {
+                          "type" : "integer"
+                        },
+                        "cite3" : {
+                          "type" : "integer"
+                        },
+                        "max_age" : {
+                          "type" : "float"
+                        },
+                        "median_age" : {
+                          "type" : "float"
+                        },
+                        "min_age" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "priority_dt" : {
+                      "properties" : {
+                        "cite1" : {
+                          "type" : "integer"
+                        },
+                        "cite2" : {
+                          "type" : "integer"
+                        },
+                        "cite3" : {
+                          "type" : "integer"
+                        },
+                        "max_age" : {
+                          "type" : "float"
+                        },
+                        "median_age" : {
+                          "type" : "float"
+                        },
+                        "min_age" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "published" : {
+                      "properties" : {
+                        "cite1" : {
+                          "type" : "integer"
+                        },
+                        "cite2" : {
+                          "type" : "integer"
+                        },
+                        "cite3" : {
+                          "type" : "integer"
+                        },
+                        "max_age" : {
+                          "type" : "float"
+                        },
+                        "median_age" : {
+                          "type" : "float"
+                        },
+                        "min_age" : {
+                          "type" : "float"
+                        }
+                      }
+                    },
+                    "total_count" : {
+                      "type" : "integer"
+                    },
+                    "total_count_self" : {
+                      "type" : "integer"
+                    }
+                  }
+                },
+                "ifi_claims" : {
+                  "properties" : {
+                    "independent_claim_count" : {
+                      "type" : "integer"
+                    },
+                    "total_claim_count" : {
+                      "type" : "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "status" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "ucid" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            }
+          }
+        },
+        "min_application_dt" : {
+          "type" : "date"
+        },
+        "min_priority_dt" : {
+          "type" : "date"
+        },
+        "min_published" : {
+          "type" : "date"
+        }
+      }
+    }

@@ -1,0 +1,70 @@
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    volumes:
+      - ./elasticsearch.local.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+    ports:
+      - "9200:9200"
+    expose:
+      - "9200"
+    environment:
+      ES_JAVA_OPTS: -Xmx1024m -Xms1024m
+    networks:
+      - local-network
+    stdin_open: true
+
+  elasticsearch-seed:
+    container_name: elasticsearch-seed
+    image: elasticdump/elasticsearch-dump
+    entrypoint:
+      - /bin/sh
+      - -ce
+    volumes:
+      - ./data/local_dump.json:/usr/local/local_dump.json
+      - ./data/local_mapping.json:/usr/local/local_mapping.json
+    command:
+      - |
+        until (wget -O- http://elasticsearch:9200/_cluster/health?wait_for_status=green > /dev/null); do
+            printf 'WAITING FOR THE ELASTICSEARCH ENDPOINT BE AVAILABLE, trying again in 5 seconds \n'
+            sleep 5
+        done
+        elasticdump --input=/usr/local/local_mapping.json --output=http://elasticsearch:9200/family_g1_v2 --type=mapping
+        elasticdump --input=/usr/local/local_dump.json --output=http://elasticsearch:9200/family_g1_v2 --type=data
+    networks:
+      - local-network
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.12.0
+    volumes:
+      - ./kibana.local.yml:/usr/share/kibana/config/kibana.yml:ro,z
+    ports:
+      - "5601:5601"
+    networks:
+      - local-network
+
+  model:
+    container_name: model
+    build:
+      context: ./model
+      dockerfile: Dockerfile
+    entrypoint:
+      - /bin/sh
+      - -ec
+    command:
+      - |
+        torchserve --start --model-store model-store --ncs --foreground
+    ports:
+      - 8601:8080
+      - 8602:8082
+    volumes:
+      - ./model/model-store:/model-store
+    networks:
+      - local-network
+
+
+networks:
+  local-network:
+    name: shared-network
+    driver: bridge
