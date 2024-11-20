@@ -68,26 +68,29 @@ def format_competitor_response(competitor_results, company):
 
 @app.get("/competitors/{company}")
 async def get_competitors(company: str):
-    """Main handler for fetching competitors based on company patent data."""
-    # Step 1: Search Elasticsearch for the company's patents
-    response = search_patents_by_company(company)
+    try:
+        # Step 1: Collect company's patents
+        response = search_patents_by_company(company)
 
-    # Step 2: Extract embeddings from the search response
-    embeddings = extract_embeddings(response)
+        # Step 2: Extract embeddings from the patents response
+        embeddings = extract_embeddings(response)
 
-    # Step 3: Combine embeddings
-    combined_embedding = combine_embeddings(embeddings)
-    if not combined_embedding:
-        return {"message": "No embeddings found for the given company."}
+        # Step 3: Combine embeddings
+        combined_embedding = combine_embeddings(embeddings)
+        if not combined_embedding:
+            return {"message": "No embeddings found for the given company."}
 
-    # Step 4: Build and perform the KNN query
-    knn_query = build_knn_query(combined_embedding, company)
-    s_knn = Search(using=es, index="family_g1_v2").query(knn_query)[:10]
-    knn_response = s_knn.execute()
+        # Step 4: Perform KNN query
+        knn_query = build_knn_query(combined_embedding, company)
+        s_knn = Search(using=es, index="family_g1_v2").query(knn_query)[:10]
+        knn_response = s_knn.execute()
 
-    # Step 5: Extract competitor names from KNN response
-    competitor_results = get_competitor_names(knn_response)
+        # Step 5: Extract competitor names from KNN response
+        competitor_results = get_competitor_names(knn_response)
 
-    # Step 6: Format and return the response
-    response_message = format_competitor_response(competitor_results, company)
-    return {"message": response_message}
+        # Step 6: Format and return the response
+        response_message = format_competitor_response(competitor_results, company)
+        return {"message": response_message}
+
+    except Exception as e:
+        return {"message": f"An error occurred: {e}"}
