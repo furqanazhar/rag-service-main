@@ -44,25 +44,6 @@ services:
     networks:
       - local-network
 
-  model:
-    container_name: model
-    build:
-      context: ./model
-      dockerfile: Dockerfile
-    entrypoint:
-      - /bin/sh
-      - -ec
-    command:
-      - |
-        torchserve --start --model-store model-store --ncs --foreground
-    ports:
-      - 8601:8080
-      - 8602:8082
-    volumes:
-      - ./model/model-store:/model-store
-    networks:
-      - local-network
-
   fastapi-service:
     container_name: fastapi-service
     build:

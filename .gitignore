@@ -1,5 +1,4 @@
 /venv_rag_service
-/model
 .idea
 .gitattributes
 *.pyc
