@@ -21,14 +21,12 @@ def search_patents_by_company(company: str):
 
 def extract_embeddings(response):
     """Extract embeddings from the search response."""
-    return [hit.embeddings_768_bgebase for hit in response.hits if hasattr(hit, 'embeddings_768_bgebase')]
+    return [hit.embeddings_768_bgebase for hit in response.hits if 'embeddings_768_bgebase' in hit]
 
 
 def combine_embeddings(embeddings):
     """Combine embeddings using mean."""
-    if embeddings:
-        return np.mean(np.array(embeddings), axis=0).tolist()
-    return None
+    return np.mean(embeddings, axis=0).tolist() if embeddings else None
 
 
 def build_knn_query(combined_embedding, company):
