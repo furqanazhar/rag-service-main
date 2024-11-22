@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+import traceback
+
+from fastapi import FastAPI, HTTPException
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 import numpy as np
@@ -19,19 +21,15 @@ def search_patents_by_company(company: str):
     return s.execute()
 
 
-def extract_embeddings(response):
-    """Extract embeddings from the search response."""
-    return [hit.embeddings_768_bgebase for hit in response.hits if 'embeddings_768_bgebase' in hit]
-
-
-def combine_embeddings(embeddings):
-    """Combine embeddings using mean."""
+def extract_and_combine_embeddings(request):
+    """Extract embeddings from the search response and compute their mean."""
+    embeddings = [hit["embeddings_768_bgebase"] for hit in request if "embeddings_768_bgebase" in hit]
     return np.mean(embeddings, axis=0).tolist() if embeddings else None
 
 
-def build_knn_query(combined_embedding, company):
-    """Build the KNN query to find similar patents."""
-    return Q(
+def build_and_run_knn_query(combined_embedding, company):
+    """Build the KNN query and run it to find similar patents."""
+    knn_query = Q(
         "bool",
         must=[
             Q("exists", field="members.best_standardized_name"),
@@ -41,15 +39,18 @@ def build_knn_query(combined_embedding, company):
             Q("term", **{"members.best_standardized_name.name.keyword": company})
         ]
     )
+    s_knn = Search(using=es, index="family_g1_v2").query(knn_query)[:10]
+    return s_knn.execute()
 
 
 def get_competitor_names(knn_response):
     """Extract competitor names from KNN query results."""
-    return [
-        hit.members[0]["best_standardized_name"][0]["name"]
-        for hit in knn_response.hits
-        if hit.members and "best_standardized_name" in hit.members[0]
-    ]
+    competitors = []
+    for hit in knn_response:
+        for member in hit["members"]:
+            if len(member["best_standardized_name"]) > 0:
+                competitors.append(member["best_standardized_name"][0]["name"])
+    return competitors
 
 
 def format_competitor_response(competitor_results, company):
@@ -70,25 +71,21 @@ async def get_competitors(company: str):
         # Step 1: Collect company's patents
         response = search_patents_by_company(company)
 
-        # Step 2: Extract embeddings from the patents response
-        embeddings = extract_embeddings(response)
-
-        # Step 3: Combine embeddings
-        combined_embedding = combine_embeddings(embeddings)
+        # Step 2: Extract embeddings from the patents response & combine embeddings
+        combined_embedding = extract_and_combine_embeddings(response.hits)
         if not combined_embedding:
             return {"message": "No embeddings found for the given company."}
 
         # Step 4: Perform KNN query
-        knn_query = build_knn_query(combined_embedding, company)
-        s_knn = Search(using=es, index="family_g1_v2").query(knn_query)[:10]
-        knn_response = s_knn.execute()
+        knn_response = build_and_run_knn_query(combined_embedding, company)
 
         # Step 5: Extract competitor names from KNN response
-        competitor_results = get_competitor_names(knn_response)
+        competitor_results = get_competitor_names(knn_response.hits)
 
         # Step 6: Format and return the response
         response_message = format_competitor_response(competitor_results, company)
         return {"message": response_message}
 
     except Exception as e:
-        return {"message": f"An error occurred: {e}"}
+        error_trace = traceback.format_exc()
+        raise HTTPException(status_code=400, detail=f"An error occurred: {e}\nTraceback:\n{error_trace}")
