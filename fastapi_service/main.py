@@ -55,7 +55,8 @@ def get_competitor_names(knn_response):
 
 def format_competitor_response(competitor_results, company):
     """Format the list of competitors into a natural language sentence."""
-    competitor_results = list(set(filter(None, competitor_results)))
+    # Remove duplicates while preserving order
+    competitor_results = list(dict.fromkeys(filter(None, competitor_results)))
     if competitor_results:
         if len(competitor_results) == 1:
             return f"The competitor of {company} is {competitor_results[0]}."

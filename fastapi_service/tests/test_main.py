@@ -67,11 +67,7 @@ def test_search_patents_by_company(mock_execute, company_name, mock_hits, expect
 )
 def test_extract_and_combine_embeddings(company_name, mock_hits, expected_result):
     result = main.extract_and_combine_embeddings(mock_hits)
-
-    if expected_result is None:
-        assert result is None, f"Expected None, but got {result} for {company_name}"
-    else:
-        np.testing.assert_array_almost_equal(result, expected_result, err_msg=f"Failed for {company_name}")
+    assert result == expected_result
 
 
 @pytest.mark.parametrize(
@@ -110,6 +106,34 @@ def test_extract_and_combine_embeddings(company_name, mock_hits, expected_result
 def test_get_competitor_names(mock_hits, expected_result):
     competitors = main.get_competitor_names(mock_hits)
     assert competitors == expected_result
+
+
+@pytest.mark.parametrize(
+    "competitors, company, expected_result",
+    [
+    # Test Case 1: Single competitor
+    (["Competitor A"], "Test Company", "The competitor of Test Company is Competitor A."),
+
+    # Test Case 2: Multiple competitors
+    (["Competitor A", "Competitor B", "Competitor C"], "Test Company",
+     "The competitors of Test Company are Competitor A, Competitor B, and Competitor C."),
+
+    # Test Case 3: No competitors
+    ([], "Test Company", "There are no competitors found for Test Company."),
+
+    # Test Case 4: Duplicate competitors in input
+    (["Competitor A", "Competitor A", "Competitor B"], "Test Company",
+     "The competitors of Test Company are Competitor A, and Competitor B."),
+
+    # Test Case 5: Competitor list contains None or empty strings
+    (["Competitor A", None, ""], "Test Company", "The competitor of Test Company is Competitor A."),
+
+    # Test Case 6: Competitor list with all empty values
+    ([None, "", ""], "Test Company", "There are no competitors found for Test Company."),
+])
+def test_format_competitor_response(competitors, company, expected_result):
+    response = main.format_competitor_response(competitors, company)
+    assert response == expected_result
 
 
 def test_root_endpoint():
