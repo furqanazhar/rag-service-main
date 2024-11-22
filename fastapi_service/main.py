@@ -3,6 +3,7 @@ import traceback
 from fastapi import FastAPI, HTTPException
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
+from elasticsearch_dsl.utils import AttrList
 import numpy as np
 
 app = FastAPI()
@@ -47,8 +48,10 @@ def get_competitor_names(knn_response):
     """Extract competitor names from KNN query results."""
     competitors = []
     for hit in knn_response:
-        for member in hit["members"]:
-            if len(member["best_standardized_name"]) > 0:
+        # Check if "members" exists and is non-empty
+        if "members" in hit and len(hit["members"]) > 0:
+            member = hit["members"][0]  # Process only the first member
+            if "best_standardized_name" in member and len(member["best_standardized_name"]) > 0:
                 competitors.append(member["best_standardized_name"][0]["name"])
     return competitors
 
