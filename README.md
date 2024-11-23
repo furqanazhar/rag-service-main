@@ -46,3 +46,11 @@ You can test if it works using:
 ```shell
 curl -H "Content-type:application/json" -d '{"instances":["Some sentence"]}' http://localhost:8601/embedding-model/predict
 ```
+
+**Unit Tests**
+This project includes unit tests to ensure the reliability and correctness of the code. Unit tests are written using the pytest framework.
+
+You can run tests using below command
+```shell
+pytest fastapi_service/tests/
+```
