@@ -1,6 +1,5 @@
 import fastapi_service.main as main
-from unittest.mock import patch, MagicMock
-from elasticsearch_dsl import Q
+from unittest.mock import patch
 from fastapi.testclient import TestClient
 import pytest
 import numpy as np
@@ -134,6 +133,127 @@ def test_get_competitor_names(mock_hits, expected_result):
 def test_format_competitor_response(competitors, company, expected_result):
     response = main.format_competitor_response(competitors, company)
     assert response == expected_result
+
+
+@pytest.mark.parametrize(
+    "combined_embedding, company, mock_hits, expected_result",
+    [
+        (
+            [0.1, 0.2, 0.3],
+            "Test Company",
+            [{"family_id": "123"}, {"family_id": "456"}],
+            [{"family_id": "123"}, {"family_id": "456"}],
+        ),
+        (
+            [0.5, 0.6, 0.7],
+            "Another Company",
+            [],
+            []
+        )
+    ]
+)
+@patch("elasticsearch_dsl.Search.execute")
+def test_knn_query_execution(mock_search_class, combined_embedding, company, mock_hits, expected_result):
+    mock_response = mock_search_class.return_value
+    mock_response.hits = mock_hits
+
+    # Call the function to test
+    actual_result = main.build_and_run_knn_query(combined_embedding, company)
+
+    # Assert the result
+    if mock_hits:
+        assert actual_result.hits == expected_result
+    else:
+        assert not actual_result.hits  # Expect no hits for empty mock_hits
+
+
+@pytest.mark.parametrize(
+    "company, mock_patent_hits, mock_combined_embedding, mock_knn_hits, expected_status, expected_message",
+    [
+        # Case 1: Successful retrieval of competitors
+        (
+                "Test Company",
+                [{"embedding": [0.1, 0.2, 0.3]}],
+                [0.1, 0.2, 0.3],
+                [{"members": [{"best_standardized_name": [{"name": "Competitor A"}]}]},
+                 {"members": [{"best_standardized_name": [{"name": "Competitor B"}]}]}],
+                200,
+                "The competitors of Test Company are Competitor A, and Competitor B.",
+        ),
+        # Case 2: Successful retrieval of single competitor
+        (
+                "Test Company",
+                [{"embedding": [0.1, 0.2, 0.3]}],
+                [0.1, 0.2, 0.3],
+                [{"members": [{"best_standardized_name": [{"name": "Competitor A"}]}]}],
+                200,
+                "The competitor of Test Company is Competitor A.",
+        ),
+        # Case 3: No competitors found
+        (
+                "Test Company",
+                [{"embedding": [0.1, 0.2, 0.3]}],
+                [0.1, 0.2, 0.3],
+                [],
+                200,
+                "There are no competitors found for Test Company.",
+        ),
+        # Case 3: No embeddings found
+        (
+                "Test Company",
+                [],
+                None,
+                [],
+                200,
+                "No embeddings found for the given company.",
+        ),
+        # Case 4: Exception during processing
+        (
+                "Test Company",
+                None,
+                None,
+                None,
+                400,
+                "An error occurred: Error in search_patents_by_company",
+        ),
+    ],
+)
+@patch("fastapi_service.main.search_patents_by_company")
+@patch("fastapi_service.main.extract_and_combine_embeddings")
+@patch("fastapi_service.main.build_and_run_knn_query")
+@patch("fastapi_service.main.get_competitor_names")
+@patch("fastapi_service.main.format_competitor_response")
+def test_get_competitors(
+        mock_format_response,
+        mock_get_competitor_names,
+        mock_knn_query,
+        mock_extract_embeddings,
+        mock_search_patents,
+        company,
+        mock_patent_hits,
+        mock_combined_embedding,
+        mock_knn_hits,
+        expected_status,
+        expected_message,
+):
+    if mock_patent_hits is not None:
+        mock_search_patents.return_value.hits = mock_patent_hits
+    else:
+        mock_search_patents.side_effect = Exception("Error in search_patents_by_company")
+
+    mock_extract_embeddings.return_value = mock_combined_embedding
+    mock_knn_query.return_value.hits = mock_knn_hits
+
+    mock_get_competitor_names.return_value = [
+        member["best_standardized_name"][0]["name"]
+        for hit in (mock_knn_hits or [])
+        for member in hit.get("members", [])
+    ]
+
+    mock_format_response.return_value = expected_message
+    response = client.get(f"/competitors/{company}")
+    assert response.status_code == expected_status
+    assert expected_message == response.json()["detail"]
 
 
 def test_root_endpoint():

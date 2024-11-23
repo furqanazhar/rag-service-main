@@ -1,10 +1,8 @@
-import traceback
-
 from fastapi import FastAPI, HTTPException
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
-from elasticsearch_dsl.utils import AttrList
 import numpy as np
+import traceback
 
 app = FastAPI()
 es = Elasticsearch("http://elasticsearch:9200")
@@ -12,7 +10,7 @@ es = Elasticsearch("http://elasticsearch:9200")
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to RAG Service!"}
+    return {"detail": "Welcome to RAG Service!"}
 
 
 def search_patents_by_company(company: str):
@@ -48,11 +46,9 @@ def get_competitor_names(knn_response):
     """Extract competitor names from KNN query results."""
     competitors = []
     for hit in knn_response:
-        # Check if "members" exists and is non-empty
-        if "members" in hit and len(hit["members"]) > 0:
-            member = hit["members"][0]  # Process only the first member
-            if "best_standardized_name" in member and len(member["best_standardized_name"]) > 0:
-                competitors.append(member["best_standardized_name"][0]["name"])
+        member = hit["members"][0]  # Process only the first member
+        if "best_standardized_name" in member and len(member["best_standardized_name"]) > 0:
+            competitors.append(member["best_standardized_name"][0]["name"])
     return competitors
 
 
@@ -78,7 +74,7 @@ async def get_competitors(company: str):
         # Step 2: Extract embeddings from the patents response & combine embeddings
         combined_embedding = extract_and_combine_embeddings(response.hits)
         if not combined_embedding:
-            return {"message": "No embeddings found for the given company."}
+            return {"detail": "No embeddings found for the given company."}
 
         # Step 4: Perform KNN query
         knn_response = build_and_run_knn_query(combined_embedding, company)
@@ -88,8 +84,8 @@ async def get_competitors(company: str):
 
         # Step 6: Format and return the response
         response_message = format_competitor_response(competitor_results, company)
-        return {"message": response_message}
+        return {"detail": response_message}
 
     except Exception as e:
         error_trace = traceback.format_exc()
-        raise HTTPException(status_code=400, detail=f"An error occurred: {e}\nTraceback:\n{error_trace}")
+        raise HTTPException(status_code=400, detail=f"An error occurred: {e}")
