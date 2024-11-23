@@ -4,7 +4,7 @@ from elasticsearch_dsl import Search, Q
 import numpy as np
 import traceback
 
-app = FastAPI()
+app = FastAPI(title="RAG Service")
 es = Elasticsearch("http://elasticsearch:9200")
 
 

@@ -47,6 +47,14 @@ You can test if it works using:
 curl -H "Content-type:application/json" -d '{"instances":["Some sentence"]}' http://localhost:8601/embedding-model/predict
 ```
 
+**API Service**
+This project uses FastAPI to build the API service.
+
+You can test API Swagger on your browser once its container is up and running using:
+```shell
+http://localhost:8000/docs
+```
+
 **Unit Tests**
 This project includes unit tests to ensure the reliability and correctness of the code. Unit tests are written using the pytest framework.
 
